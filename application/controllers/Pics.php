@@ -45,6 +45,8 @@ class Pics extends CI_Controller
         $config['upload_path']      = './uploads/';
         $config['allowed_types']    = 'gif|jpg|png|jpeg';
 
+        $this->image_lib->initialize($config);
+
         $url_prefix = "./uploads/";
 
         $this->load->library('upload', $config);
@@ -65,18 +67,7 @@ class Pics extends CI_Controller
                 $full_path = $url_prefix.$orig_name;
                 $thumb_path = $url_prefix.$val['raw_name']."_thumb".$val['file_ext'];
 
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = $orig_name;
-                $config['create_thumb'] = TRUE;
-                $config['maintain_ratio'] = TRUE;
-                $config['width']     = 75;
-                $config['height']   = 50;
-
-                $this->load->library('image_lib', $config);
-
-                $this->image_lib->resize();
-
-                echo $this->image_lib->display_errors();
+                $this->resize_pic($full_path);
             }
 
             $this->api->save_to_database($full_path, $show_name, $thumb_path);
@@ -88,10 +79,10 @@ class Pics extends CI_Controller
         $config['source_image'] = $orig_name;
         $config['create_thumb'] = TRUE;
         $config['maintain_ratio'] = TRUE;
-        $config['width']     = 75;
-        $config['height']   = 50;
+        $config['width']     = 75*3;
+        $config['height']   = 50*3;
 
-        $this->load->library('image_lib', $config);
+        $this->image_lib->initialize($config);
 
         $this->image_lib->resize();
 

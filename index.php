@@ -55,7 +55,7 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-header('Access-Control-Allow-Origin: http://techman.me');
+header('Access-Control-Allow-Origin: http://localhost:8080');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: x-token,x-uid,x-token-check,x-requested-with,content-type,Host,auth-token,Authorization');
 header('Access-Control-Expose-Headers: auth-token');
